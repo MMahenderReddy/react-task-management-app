@@ -1,0 +1,42 @@
+.task-card {
+  background: #fafbfc;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-left: 4px solid #1976d2;
+}
+.task-card.completed {
+  border-left-color: #43a047;
+}
+.task-card.pending {
+  border-left-color: #ff9800;
+}
+.task-card.overdue {
+  border-left-color: #e53935;
+}
+.task-card .task-id {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.task-card .task-status {
+  color: #555;
+}
+.task-card .task-due-date {
+  font-size: 0.98rem;
+  color: #1976d2;
+}
+.task-card.pending .task-due-date.overdue {
+  color: #e53935;
+  font-weight: bold;
+}
+.task-card.completed .task-due-date {
+  color: #43a047;
+}
+.task-card.no-due-date .task-due-date {
+  color: #888;
+}
