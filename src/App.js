@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TaskDashboard from './components/TaskDashboard';
+import TaskList from './components/TaskList';
 import tasksData from './data/tasks';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <div>
       <h1 style={{ textAlign: 'center' }}>Task Dashboard</h1>
       <TaskDashboard tasks={tasks} />
+      <TaskList tasks={tasks} />
       {/* Other app content */}
     </div>
   );
