@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import NewTaskForm from './components/NewTaskForm';
+import NotificationPreferences from './components/NotificationPreferences';
 import { getTasks, addTask as addTaskToStorage } from './utils/localStorage';
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
     setTasks(prev => [...prev, newTask]);
   };
 
+  // For demo, use a hardcoded userId
+  const userId = 'demo-user-1';
+
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Task Dashboard</h1>
@@ -44,6 +48,7 @@ function App() {
       </div>
       <NewTaskForm onAdd={handleAddTask} />
       <TaskDashboard tasks={filteredTasks} />
+      <NotificationPreferences userId={userId} />
       {/* Other app content */}
     </div>
   );
