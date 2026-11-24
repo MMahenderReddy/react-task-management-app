@@ -61,3 +61,24 @@ export function deleteTask(taskId) {
   saveTasks(newTasks);
   return true;
 }
+
+/**
+ * Assign a task to a user and send email notification.
+ * @param {Object} task - Task object (must have id, title, project, dueDate, assignedTo)
+ * @param {Object} user - User object (must have email, name)
+ * @returns {Promise<boolean>} True if assignment and notification succeeded
+ */
+import { sendEmail } from './email';
+
+export async function assignTask(task, user) {
+  // Update the task's assignedTo
+  const updatedTask = { ...task, assignedTo: user.email };
+  const updated = updateTask(updatedTask);
+  if (!updated) return false;
+
+  // Compose email
+  const subject = `Task Assigned: ${task.title}`;
+  const body = `Hello ${user.name},\n\nYou have been assigned a new task.\n\nTitle: ${task.title}\nProject: ${task.project || 'N/A'}\nDue Date: ${task.dueDate ? new Date(task.dueDate).toLocaleString() : 'N/A'}\n\nPlease check your dashboard for more details.\n\nBest regards,\nTask Management System`;
+  await sendEmail(user.email, subject, body);
+  return true;
+}
