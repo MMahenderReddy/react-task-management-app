@@ -46,6 +46,11 @@ function App() {
     });
   };
 
+  const handleAddTask = task => {
+    const newTask = addTaskToStorage(task);
+    setTasks(prev => [...prev, newTask]);
+  };
+
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Task Dashboard</h1>
