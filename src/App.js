@@ -1,26 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import tasksData from './data/tasks';
+import { searchTasks } from './api/searchTasks';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [search, setSearch] = useState('');
 
+  // Debounce search input for real-time filtering
   useEffect(() => {
-    // Simulate fetching tasks from a data source
+    let active = true;
+    // Simulate async search (could be replaced with real API call)
+    const doSearch = () => {
+      const results = searchTasks(search);
+      if (active) setTasks(results);
+    };
+    // Debounce: wait 200ms after last keystroke
+    const timeout = setTimeout(doSearch, 200);
+    return () => {
+      active = false;
+      clearTimeout(timeout);
+    };
+  }, [search]);
+
+  // On mount, show all tasks
+  useEffect(() => {
     setTasks(tasksData);
   }, []);
-
-  // Filter tasks by search string (case-insensitive, match id or status)
-  const filteredTasks = tasks.filter(task => {
-    if (!search.trim()) return true;
-    const searchLower = search.toLowerCase();
-    return (
-      (task.id && String(task.id).toLowerCase().includes(searchLower)) ||
-      (task.status && task.status.toLowerCase().includes(searchLower))
-    );
-  });
 
   return (
     <div>
@@ -28,7 +35,7 @@ function App() {
       <div style={{ maxWidth: 600, margin: '0 auto' }}>
         <SearchBar value={search} onChange={setSearch} />
       </div>
-      <TaskDashboard tasks={filteredTasks} />
+      <TaskDashboard tasks={tasks} />
       {/* Other app content */}
     </div>
   );
