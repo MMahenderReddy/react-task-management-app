@@ -1,0 +1,136 @@
+.notifications-bell {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.notifications-bell .bell-icon {
+  font-size: 1.8rem;
+  color: #1976d2;
+  transition: color 0.2s;
+}
+
+.notifications-bell .bell-icon.unread {
+  color: #e53935;
+}
+
+.notifications-bell .unread-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #e53935;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: 2px 7px;
+  min-width: 22px;
+  text-align: center;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+}
+
+.notifications-dropdown {
+  position: absolute;
+  right: 0;
+  top: 2.2rem;
+  width: 340px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  z-index: 100;
+  padding: 0.5rem 0;
+  max-height: 370px;
+  overflow-y: auto;
+  min-width: 260px;
+}
+
+.notifications-dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.notifications-dropdown-header .dropdown-title {
+  font-weight: 600;
+  color: #1976d2;
+  font-size: 1.05rem;
+}
+
+.notifications-dropdown-header .mark-all-btn {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-size: 0.97rem;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0;
+  transition: color 0.2s;
+}
+.notifications-dropdown-header .mark-all-btn:hover {
+  color: #1256a3;
+}
+
+.notifications-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notifications-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid #f5f5f5;
+  background: #f9fafd;
+  transition: background 0.18s;
+}
+
+.notifications-list-item:last-child {
+  border-bottom: none;
+}
+
+.notifications-list-item.unread {
+  background: #e3f2fd;
+}
+
+.notifications-list-item .notif-content {
+  flex: 1;
+}
+
+.notifications-list-item .notif-title {
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 2px;
+}
+
+.notifications-list-item .notif-time {
+  font-size: 0.88rem;
+  color: #888;
+  margin-top: 2px;
+}
+
+.notifications-list-item .mark-read-btn {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-size: 0.93rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  padding: 0;
+  transition: color 0.2s;
+}
+.notifications-list-item .mark-read-btn:hover {
+  color: #1256a3;
+}
+
+.notifications-empty {
+  text-align: center;
+  color: #888;
+  padding: 1.5rem 0.5rem 1rem 0.5rem;
+  font-size: 1.05rem;
+}
