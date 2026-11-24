@@ -34,19 +34,31 @@ const TaskDashboard = ({ tasks }) => {
     <div className="task-dashboard">
       <div className="dashboard-card total">
         <div className="count">{counts.total}</div>
-        <div className="label">Total Tasks</div>
+        <div className="label">
+          Total Tasks
+          <span className="column-task-count-badge" title="Total tasks">{counts.total}</span>
+        </div>
       </div>
       <div className="dashboard-card pending">
         <div className="count">{counts.pending}</div>
-        <div className="label">Pending</div>
+        <div className="label">
+          Pending
+          <span className="column-task-count-badge" title="Pending tasks">{counts.pending}</span>
+        </div>
       </div>
       <div className="dashboard-card completed">
         <div className="count">{counts.completed}</div>
-        <div className="label">Completed</div>
+        <div className="label">
+          Completed
+          <span className="column-task-count-badge" title="Completed tasks">{counts.completed}</span>
+        </div>
       </div>
       <div className="dashboard-card overdue">
         <div className="count">{counts.overdue}</div>
-        <div className="label">Overdue</div>
+        <div className="label">
+          Overdue
+          <span className="column-task-count-badge" title="Overdue tasks">{counts.overdue}</span>
+        </div>
       </div>
     </div>
   );
