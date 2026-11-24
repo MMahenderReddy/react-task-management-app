@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import NewTaskForm from './components/NewTaskForm';
-import { getTasks, addTask as addTaskToStorage } from './utils/localStorage';
+import TaskList from './components/TaskList';
+import { getTasks, addTask as addTaskToStorage, updateTask as updateTaskInStorage } from './utils/localStorage';
+import { searchTasks } from './api/searchTasks';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [search, setSearch] = useState('');
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
   useEffect(() => {
     // Load tasks from localStorage, or fallback to data/tasks.js if empty
@@ -21,15 +24,27 @@ function App() {
     }
   }, []);
 
-  // Filter tasks by search string (case-insensitive, match id or status)
-  const filteredTasks = tasks.filter(task => {
-    if (!search.trim()) return true;
-    const searchLower = search.toLowerCase();
-    return (
-      (task.id && String(task.id).toLowerCase().includes(searchLower)) ||
-      (task.status && task.status.toLowerCase().includes(searchLower))
-    );
-  });
+  // Real-time filtering using backend search endpoint
+  useEffect(() => {
+    setFilteredTasks(searchTasks(search, tasks));
+  }, [search, tasks]);
+
+  const handleAddTask = task => {
+    const newTask = addTaskToStorage(task);
+    setTasks(prev => [...prev, newTask]);
+  };
+
+  const handlePriorityChange = (taskId, newPriority) => {
+    setTasks(prevTasks => {
+      const updatedTasks = prevTasks.map(task =>
+        String(task.id) === String(taskId) ? { ...task, priority: newPriority } : task
+      );
+      // Persist change
+      const updatedTask = updatedTasks.find(t => String(t.id) === String(taskId));
+      if (updatedTask) updateTaskInStorage(updatedTask);
+      return updatedTasks;
+    });
+  };
 
   const handleAddTask = task => {
     const newTask = addTaskToStorage(task);
@@ -44,7 +59,7 @@ function App() {
       </div>
       <NewTaskForm onAdd={handleAddTask} />
       <TaskDashboard tasks={filteredTasks} />
-      {/* Other app content */}
+      <TaskList tasks={filteredTasks} onPriorityChange={handlePriorityChange} />
     </div>
   );
 }
