@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import NewTaskForm from './components/NewTaskForm';
-import { getTasks, addTask as addTaskToStorage } from './utils/localStorage';
+import TaskBoard from './components/TaskBoard';
+import TaskDetailModal from './components/TaskDetailModal';
+import { getTasks, addTask as addTaskToStorage, updateTask as updateTaskInStorage } from './utils/localStorage';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [search, setSearch] = useState('');
+  const [editingTask, setEditingTask] = useState(null);
 
   useEffect(() => {
     // Load tasks from localStorage, or fallback to data/tasks.js if empty
@@ -36,6 +39,23 @@ function App() {
     setTasks(prev => [...prev, newTask]);
   };
 
+  const handleEditTask = task => {
+    setEditingTask(task);
+  };
+
+  const handleSaveTask = updatedTask => {
+    updateTaskInStorage(updatedTask);
+    setTasks(prev => prev.map(t => t.id === updatedTask.id ? updatedTask : t));
+    setEditingTask(null);
+  };
+
+  const handleMoveTask = (task, newStatus) => {
+    if (task.status === newStatus) return;
+    const updatedTask = { ...task, status: newStatus };
+    updateTaskInStorage(updatedTask);
+    setTasks(prev => prev.map(t => t.id === task.id ? updatedTask : t));
+  };
+
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Task Dashboard</h1>
@@ -44,7 +64,18 @@ function App() {
       </div>
       <NewTaskForm onAdd={handleAddTask} />
       <TaskDashboard tasks={filteredTasks} />
-      {/* Other app content */}
+      <TaskBoard
+        tasks={filteredTasks}
+        onEditTask={handleEditTask}
+        onMoveTask={handleMoveTask}
+      />
+      {editingTask && (
+        <TaskDetailModal
+          task={editingTask}
+          onClose={() => setEditingTask(null)}
+          onSave={handleSaveTask}
+        />
+      )}
     </div>
   );
 }
