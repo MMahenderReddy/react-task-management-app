@@ -1,0 +1,108 @@
+.notification-prefs-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 2rem 2.5rem 1.5rem 2.5rem;
+  max-width: 480px;
+  margin: 2rem auto 2.5rem auto;
+}
+.notification-prefs-container h2 {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
+  color: #1976d2;
+  text-align: center;
+}
+.notification-prefs-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.np-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0.2rem;
+}
+.np-label {
+  font-size: 1.07rem;
+  color: #333;
+}
+.np-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+.np-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.np-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .2s;
+  border-radius: 24px;
+}
+.np-switch input:checked + .np-slider {
+  background-color: #1976d2;
+}
+.np-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #fff;
+  transition: .2s;
+  border-radius: 50%;
+}
+.np-switch input:checked + .np-slider:before {
+  transform: translateX(20px);
+}
+.np-save-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 0.7rem 2.5rem;
+  font-size: 1.07rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  align-self: center;
+  transition: background 0.2s;
+}
+.np-save-btn:disabled {
+  background: #b0c4de;
+  cursor: not-allowed;
+}
+.np-error {
+  color: #e53935;
+  background: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-top: 0.7rem;
+  font-size: 0.98rem;
+  text-align: center;
+}
+.np-success {
+  color: #388e3c;
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-top: 0.7rem;
+  font-size: 0.98rem;
+  text-align: center;
+}
+.np-loading {
+  text-align: center;
+  color: #888;
+  font-size: 1.08rem;
+}
