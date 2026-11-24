@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import tasksData from './data/tasks';
+import TaskList from './components/TaskList';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -29,7 +30,9 @@ function App() {
         <SearchBar value={search} onChange={setSearch} />
       </div>
       <TaskDashboard tasks={filteredTasks} />
-      {/* Other app content */}
+      <div style={{ maxWidth: 600, margin: '2rem auto 0 auto' }}>
+        <TaskList tasks={filteredTasks} />
+      </div>
     </div>
   );
 }
