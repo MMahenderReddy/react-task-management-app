@@ -1,0 +1,40 @@
+/*
+  CSS Custom Properties for Dark Mode Colors
+  Usage: Add `class="dark-mode"` to <body> or a root element to enable dark mode.
+*/
+
+:root {
+  /* Light mode (default) colors for reference */
+  --color-bg: #fafbfc;
+  --color-bg-card: #fff;
+  --color-text: #222;
+  --color-text-secondary: #555;
+  --color-border: #ccc;
+  --color-primary: #1976d2;
+  --color-primary-hover: #1256a3;
+  --color-error: #e53935;
+  --color-error-bg: #ffebee;
+  --color-error-border: #ffcdd2;
+  --color-success: #43a047;
+  --color-warning: #ff9800;
+}
+
+.dark-mode {
+  --color-bg: #181a1b;
+  --color-bg-card: #23272a;
+  --color-text: #f5f6fa;
+  --color-text-secondary: #b0b3b8;
+  --color-border: #35393c;
+  --color-primary: #90caf9;
+  --color-primary-hover: #64b5f6;
+  --color-error: #ef5350;
+  --color-error-bg: #2d1b1b;
+  --color-error-border: #b71c1c;
+  --color-success: #66bb6a;
+  --color-warning: #ffb74d;
+}
+
+body.dark-mode {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
