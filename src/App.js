@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import NewTaskForm from './components/NewTaskForm';
+import TaskList from './components/TaskList';
 import { getTasks, addTask as addTaskToStorage } from './utils/localStorage';
 
 function App() {
@@ -44,7 +45,9 @@ function App() {
       </div>
       <NewTaskForm onAdd={handleAddTask} />
       <TaskDashboard tasks={filteredTasks} />
-      {/* Other app content */}
+      <div style={{ maxWidth: 600, margin: '2rem auto' }}>
+        <TaskList tasks={filteredTasks} />
+      </div>
     </div>
   );
 }
