@@ -3,6 +3,8 @@ import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import NewTaskForm from './components/NewTaskForm';
 import { getTasks, addTask as addTaskToStorage } from './utils/localStorage';
+import Notifications from './components/Notifications';
+import { addNotification } from './api/notifications';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -34,10 +36,16 @@ function App() {
   const handleAddTask = task => {
     const newTask = addTaskToStorage(task);
     setTasks(prev => [...prev, newTask]);
+    addNotification({
+      message: `New task added: "${task.title}"`,
+    });
   };
 
   return (
     <div>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', maxWidth: 900, margin: '0 auto', padding: '1.2rem 1.5rem 0 1.5rem' }}>
+        <Notifications />
+      </div>
       <h1 style={{ textAlign: 'center' }}>Task Dashboard</h1>
       <div style={{ maxWidth: 600, margin: '0 auto' }}>
         <SearchBar value={search} onChange={setSearch} />
