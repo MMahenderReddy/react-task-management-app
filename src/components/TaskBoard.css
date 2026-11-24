@@ -1,0 +1,103 @@
+.task-board {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin: 2rem 0 3rem 0;
+}
+.board-column {
+  background: #f7fafd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  min-width: 320px;
+  max-width: 340px;
+  padding: 1.2rem 1.2rem 1.5rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+}
+.board-column-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.1rem;
+}
+.board-column-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1976d2;
+}
+.board-column-badge {
+  background: #e3eafc;
+  color: #1976d2;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.1rem 0.8rem;
+  font-size: 1.05rem;
+  margin-left: 0.2rem;
+}
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  flex: 1;
+}
+.task-card {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  padding: 1rem 1.2rem 0.9rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 2px solid transparent;
+  cursor: grab;
+  transition: border 0.2s;
+}
+.task-card.overdue {
+  border: 2px solid #e53935;
+}
+.task-card .task-title {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #222;
+}
+.task-card .task-title.overdue {
+  color: #e53935;
+}
+.task-card .task-desc {
+  color: #555;
+  font-size: 0.98rem;
+  margin-bottom: 0.2rem;
+}
+.task-card .task-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.97rem;
+  color: #666;
+}
+.priority-badge {
+  display: inline-block;
+  border-radius: 10px;
+  padding: 0.13rem 0.7rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin-right: 0.5rem;
+}
+.priority-low {
+  background: #43a047;
+}
+.priority-medium {
+  background: #ff9800;
+}
+.priority-high {
+  background: #e53935;
+}
+.edit-priority-select {
+  font-size: 0.97rem;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  padding: 0.1rem 0.4rem;
+  margin-left: 0.5rem;
+}

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import NewTaskForm from './components/NewTaskForm';
-import { getTasks, addTask as addTaskToStorage } from './utils/localStorage';
+import TaskBoard from './components/TaskBoard';
+import { getTasks, addTask as addTaskToStorage, updateTask as updateTaskInStorage } from './utils/localStorage';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -36,6 +37,18 @@ function App() {
     setTasks(prev => [...prev, newTask]);
   };
 
+  const handlePriorityChange = (task, newPriority) => {
+    const updated = { ...task, priority: newPriority };
+    updateTaskInStorage(updated);
+    setTasks(prev => prev.map(t => t.id === task.id ? updated : t));
+  };
+
+  const handleStatusChange = (task, newStatus) => {
+    const updated = { ...task, status: newStatus };
+    updateTaskInStorage(updated);
+    setTasks(prev => prev.map(t => t.id === task.id ? updated : t));
+  };
+
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Task Dashboard</h1>
@@ -44,7 +57,11 @@ function App() {
       </div>
       <NewTaskForm onAdd={handleAddTask} />
       <TaskDashboard tasks={filteredTasks} />
-      {/* Other app content */}
+      <TaskBoard
+        tasks={filteredTasks}
+        onPriorityChange={handlePriorityChange}
+        onStatusChange={handleStatusChange}
+      />
     </div>
   );
 }
