@@ -1,0 +1,73 @@
+.task-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 1.2rem 1.5rem 1.2rem 1.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  border-left: 6px solid #1976d2;
+  position: relative;
+}
+.task-card.overdue {
+  border-left-color: #e53935;
+  background: #fff6f6;
+}
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.task-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #222;
+}
+.task-priority {
+  font-size: 0.98rem;
+  font-weight: 500;
+  padding: 0.18rem 0.8rem;
+  border-radius: 12px;
+  background: #e3eafc;
+  color: #1976d2;
+}
+.priority-high {
+  background: #ffebee;
+  color: #e53935;
+}
+.priority-medium {
+  background: #fffde7;
+  color: #ff9800;
+}
+.priority-low {
+  background: #e8f5e9;
+  color: #43a047;
+}
+.task-desc {
+  color: #444;
+  font-size: 1.01rem;
+}
+.task-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.98rem;
+  color: #666;
+  align-items: center;
+}
+.task-due-date {
+  font-weight: 500;
+}
+.task-actions {
+  margin-top: 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.task-actions select {
+  padding: 0.2rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.98rem;
+}

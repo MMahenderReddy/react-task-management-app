@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import NewTaskForm from './components/NewTaskForm';
-import { getTasks, addTask as addTaskToStorage } from './utils/localStorage';
+import TaskList from './components/TaskList';
+import { getTasks, addTask as addTaskToStorage, updateTask as updateTaskInStorage } from './utils/localStorage';
+import { searchTasks } from './api/searchTasks';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -21,19 +23,24 @@ function App() {
     }
   }, []);
 
-  // Filter tasks by search string (case-insensitive, match id or status)
-  const filteredTasks = tasks.filter(task => {
-    if (!search.trim()) return true;
-    const searchLower = search.toLowerCase();
-    return (
-      (task.id && String(task.id).toLowerCase().includes(searchLower)) ||
-      (task.status && task.status.toLowerCase().includes(searchLower))
-    );
-  });
+  // Real-time filter using backend-like searchTasks API (title/desc)
+  const filteredTasks = searchTasks(search, tasks);
 
   const handleAddTask = task => {
     const newTask = addTaskToStorage(task);
     setTasks(prev => [...prev, newTask]);
+  };
+
+  const handlePriorityChange = (taskId, newPriority) => {
+    setTasks(prevTasks => {
+      const updated = prevTasks.map(task =>
+        String(task.id) === String(taskId) ? { ...task, priority: newPriority } : task
+      );
+      // Persist change
+      const changedTask = updated.find(t => String(t.id) === String(taskId));
+      if (changedTask) updateTaskInStorage(changedTask);
+      return updated;
+    });
   };
 
   return (
@@ -44,7 +51,7 @@ function App() {
       </div>
       <NewTaskForm onAdd={handleAddTask} />
       <TaskDashboard tasks={filteredTasks} />
-      {/* Other app content */}
+      <TaskList tasks={filteredTasks} onPriorityChange={handlePriorityChange} />
     </div>
   );
 }

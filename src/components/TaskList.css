@@ -1,0 +1,14 @@
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 600px;
+  margin: 2rem auto 0 auto;
+}
+
+.task-list-empty {
+  text-align: center;
+  color: #888;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
