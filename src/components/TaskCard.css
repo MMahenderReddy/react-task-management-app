@@ -1,0 +1,71 @@
+.task-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 1.2rem 1.5rem 1rem 1.5rem;
+  margin-bottom: 1.2rem;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+  max-width: 500px;
+}
+.task-card.overdue {
+  border-color: #e53935;
+}
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.task-title {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #1976d2;
+}
+.task-status {
+  font-size: 0.98rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 12px;
+  background: #f5f5f5;
+  color: #555;
+  text-transform: capitalize;
+}
+.status-completed {
+  background: #e8f5e9;
+  color: #43a047;
+}
+.status-pending {
+  background: #fff3e0;
+  color: #ff9800;
+}
+.task-desc {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 0.7rem;
+}
+.task-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.97rem;
+}
+.task-due {
+  color: #888;
+  font-style: italic;
+}
+.task-priority {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.task-priority label {
+  font-size: 0.97rem;
+  color: #555;
+}
+.task-priority select {
+  padding: 0.2rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.97rem;
+  background: #fafbfc;
+}
