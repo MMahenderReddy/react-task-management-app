@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import NewTaskForm from './components/NewTaskForm';
-import { getTasks, addTask as addTaskToStorage } from './utils/localStorage';
+import TaskBoard from './components/TaskBoard';
+import { getTasks, addTask as addTaskToStorage, updateTask as updateTaskInStorage } from './utils/localStorage';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -36,6 +37,34 @@ function App() {
     setTasks(prev => [...prev, newTask]);
   };
 
+  const handleTaskStatusChange = (taskId, newStatus) => {
+    setTasks(prevTasks => {
+      const updated = prevTasks.map(task =>
+        String(task.id) === String(taskId)
+          ? { ...task, status: newStatus }
+          : task
+      );
+      // Persist change
+      const changedTask = updated.find(t => String(t.id) === String(taskId));
+      if (changedTask) updateTaskInStorage(changedTask);
+      return updated;
+    });
+  };
+
+  const handleTaskPriorityChange = (taskId, newPriority) => {
+    setTasks(prevTasks => {
+      const updated = prevTasks.map(task =>
+        String(task.id) === String(taskId)
+          ? { ...task, priority: newPriority }
+          : task
+      );
+      // Persist change
+      const changedTask = updated.find(t => String(t.id) === String(taskId));
+      if (changedTask) updateTaskInStorage(changedTask);
+      return updated;
+    });
+  };
+
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Task Dashboard</h1>
@@ -44,6 +73,11 @@ function App() {
       </div>
       <NewTaskForm onAdd={handleAddTask} />
       <TaskDashboard tasks={filteredTasks} />
+      <TaskBoard
+        tasks={filteredTasks}
+        onTaskStatusChange={handleTaskStatusChange}
+        onTaskPriorityChange={handleTaskPriorityChange}
+      />
       {/* Other app content */}
     </div>
   );
