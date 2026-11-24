@@ -2,11 +2,24 @@ import React, { useState, useEffect } from 'react';
 import TaskDashboard from './components/TaskDashboard';
 import SearchBar from './components/SearchBar';
 import NewTaskForm from './components/NewTaskForm';
+import ThemeToggle from './components/ThemeToggle';
 import { getTasks, addTask as addTaskToStorage } from './utils/localStorage';
+
+function getPreferredTheme() {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark' || stored === 'light') return stored;
+  }
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+  return 'light';
+}
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [search, setSearch] = useState('');
+  const [theme, setTheme] = useState(getPreferredTheme());
 
   useEffect(() => {
     // Load tasks from localStorage, or fallback to data/tasks.js if empty
@@ -20,6 +33,11 @@ function App() {
       });
     }
   }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   // Filter tasks by search string (case-insensitive, match id or status)
   const filteredTasks = tasks.filter(task => {
@@ -36,9 +54,23 @@ function App() {
     setTasks(prev => [...prev, newTask]);
   };
 
+  const handleThemeToggle = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   return (
     <div>
-      <h1 style={{ textAlign: 'center' }}>Task Dashboard</h1>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        maxWidth: 600,
+        margin: '1.5rem auto 0 auto',
+        padding: '0 1rem',
+      }}>
+        <h1 style={{ textAlign: 'center', margin: 0 }}>Task Dashboard</h1>
+        <ThemeToggle theme={theme} onToggle={handleThemeToggle} />
+      </div>
       <div style={{ maxWidth: 600, margin: '0 auto' }}>
         <SearchBar value={search} onChange={setSearch} />
       </div>
