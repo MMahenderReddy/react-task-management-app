@@ -1,0 +1,133 @@
+.task-board {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin: 2rem 0 3rem 0;
+}
+.board-column {
+  background: #f7f8fa;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1.2rem 1rem 1.5rem 1rem;
+  min-width: 270px;
+  max-width: 320px;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+}
+.board-column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+.board-column-title {
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: #1976d2;
+}
+.board-column-badge {
+  background: #1976d2;
+  color: #fff;
+  font-size: 0.98rem;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 0.2rem 0.8rem;
+  margin-left: 0.5rem;
+  min-width: 28px;
+  text-align: center;
+}
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  flex: 1 1 0;
+}
+
+.task-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  padding: 1rem 1.2rem 0.8rem 1.2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border: 2px solid transparent;
+  transition: border 0.2s;
+}
+.task-card.overdue {
+  border: 2px solid #e53935;
+}
+.task-card .overdue-text {
+  color: #e53935;
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+.task-card .task-title {
+  font-size: 1.08rem;
+  font-weight: 500;
+  color: #222;
+}
+.task-card .task-desc {
+  font-size: 0.98rem;
+  color: #555;
+  margin-bottom: 0.2rem;
+}
+.task-card .task-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.2rem;
+}
+.priority-badge {
+  display: inline-block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.13rem 0.7rem;
+  margin-right: 0.4rem;
+  letter-spacing: 0.02em;
+}
+.priority-low {
+  background: #e3f2fd;
+  color: #1976d2;
+  border: 1.5px solid #90caf9;
+}
+.priority-medium {
+  background: #fffde7;
+  color: #fbc02d;
+  border: 1.5px solid #ffe082;
+}
+.priority-high {
+  background: #ffebee;
+  color: #e53935;
+  border: 1.5px solid #ffcdd2;
+}
+.task-card .due-date {
+  font-size: 0.93rem;
+  color: #888;
+}
+.task-card .edit-btn {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 0.2rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.task-card .edit-btn:hover {
+  background: #e3f2fd;
+}
+.edit-priority-select {
+  font-size: 0.95rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-right: 0.5rem;
+}
